@@ -13,10 +13,14 @@ const App = () => {
       if (camera) {
         const options = {quality: 0.5, base64: true};
         const image = await camera.takePictureAsync(options);
-        console.log(image);
         const formData = new FormData();
         formData.append('image', image);
-        await api.post('/', formData);
+        try {
+          const response = await api.post('/', formData);
+          console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
       }
     }, 3000);
   };
